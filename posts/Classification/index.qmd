@@ -1,9 +1,9 @@
 ---
-title: "Post With Code"
-author: "Harlow Malloc"
+title: "Topic 1: Classification"
+author: "Chiraag Potharaju"
 date: "2023-09-25"
 categories: [news, code, analysis]
-image: "image.jpg"
+image: "Classification_pic1.png"
 ---
 
 This is a post with executable code.

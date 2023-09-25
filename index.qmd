@@ -1,5 +1,6 @@
 ---
-title: "Machine_Learning_Blog_Chiraag_Potharaju"
+title: "Machine Learning Blog"
+subtitle: "By: Chiraag Potharaju"
 listing:
   contents: posts
   sort: "date desc"

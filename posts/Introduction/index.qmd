@@ -1,0 +1,17 @@
+---
+title: "Introduction"
+author: "Chiraag Potharaju"
+date: "2023-09-22"
+categories: [news]
+image: "ml-pic1.jpg"
+---
+
+Welcome!
+
+My name is Chiraag Potharaju and I am currently a graduate student enrolled at Virginia Tech taking CS 5804: Introduction to Machine Learning I.
+
+![](images/ml-pic1.jpg)
+
+The purpose of this blog is to go in depth about 3 separate topics related to Machine Learning. Throughout the 3 posts in this blog, there will be detailed descriptions, code, and graphs and other diagrams to show various visualizations of these topics.
+
+If there are any questions or issues regarding the content in these posts, feel free to contact me at chiraagp20\@vt.edu.
