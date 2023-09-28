@@ -2,11 +2,15 @@
 title: "Topic 1: Classification"
 author: "Chiraag Potharaju"
 date: "2023-09-25"
-categories: [code, analysis]
+categories: [news, code, analysis]
 image: "Classification_pic1.png"
 ---
 
+<<<<<<< HEAD
 This post gives detailed descriptions and analysis about Classification.
+=======
+This is a post with executable code.
+>>>>>>> parent of 7102a03 (classificiation intro)
 
 ```{r}
 1 + 1
