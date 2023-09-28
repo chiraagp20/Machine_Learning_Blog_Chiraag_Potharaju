@@ -2,12 +2,18 @@
 title: "Topic 1: Classification"
 author: "Chiraag Potharaju"
 date: "2023-09-25"
-categories: [news, code, analysis]
+categories: [code, analysis]
 image: "Classification_pic1.png"
 ---
 
-This is a post with executable code.
+This post gives detailed descriptions and analysis about Classification.
+
+**Classification Introduction:**
+
+Classification is a machine learning learning task that involves predicting categorical labels or classes. Some examples include predicting whether an email is spam or not, predicting medical diagnosis on given symptoms, and predicting whether a transaction or call is valid or not. Classification uses prior data to allow it to predict and categorize data for users to analyze.
+
+Throughout this post, we'll explore classification in machine learning using Python, Scikit-learn, and other various libraries.
 
 ```{r}
-1 + 1
+1 + 1 + 1
 ```
