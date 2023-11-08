@@ -1,0 +1,221 @@
+---
+title: "Topic 1: Probability Theory and Random Variables" 
+author: "Chiraag Potharaju" 
+date: "2023-09-25" 
+categories: [news, code, analysis] 
+image: "probability.jpg" 
+---
+
+This post gives detailed descriptions and analysis about Probability Theory and Random Variables.
+
+<br>
+
+**Introduction to Probability Theory and Random Variables**
+
+Probability Theory is a framework to analyze random events which allow us to quantify likelihood and uncertainty. Throughout this post, we will dive deeper into probability theory in machine learning using Python, Scikit-learn, and Tensorflow highlighting the importance of this concept. There will also be several data visualizations and executable code chunks to emphasize these points.
+
+<br>
+
+**Important Theories and Variables**
+
+There are a some types of variables, distributions, and variables that are important to understand for a basis. Some of them include:
+
+-   Random Variable- A variable whose value depends on the outcome of a random event. Can be discrete or continuous. Ex: Dice roll or coin flip.
+
+-   Discrete Random Variable- A random variable with a countable number of possible values.
+
+-   Continuous Random Variable- A random variable with an uncountable number of possible values.
+
+-   Normal Distribution- A "bell curve" distribution. Mean and variance are used with this.
+
+-   Binomial Distribution- Illustrates the number of successes in independent yes/no experiments. Each experiment would have a p chance of succeeding.
+
+-   Poisson Distribution- Illustrates the number of events occurring in a fixed set of time.
+
+-   Law of Large Numbers- The sample mean comes closer to population mean as more values are accounted for.
+
+-   Central Limit Theorem- Sum of random variables converge to normal distribution.
+
+-   Bayes' Theorem- Relates conditional and marginal probabilities through a formula.
+
+These theories, distributions, and variables are used in several fields such as statistics, machine learning, finance, engineering, medicine, science, and more.
+
+<br>
+
+**Step 0:**
+
+This step is to ensure that required libraries are installed on the machine before proceeding.
+
+```         
+---   pip install numpy matplotlib scikit-learn ---
+```
+
+This step installs the required libraries to run the code below. Ensure python is installed on the machine already and the terminal has admin access when running this command.
+
+<br>
+
+**Step 1:**
+
+When using Python, we have to import some libraries that will be utilized throughout the blog.
+
+```{python}
+import numpy as np 
+import matplotlib.pyplot as plt 
+import scipy.stats as stats 
+from scipy.stats import binom
+from scipy.stats import norm
+from scipy.stats import poisson
+```
+
+Some of the imports include numpy for data manipulation, matplotlib for data visualization, and scipy stats for statistical comparisons.
+
+<br>
+
+**Step 2:**
+
+Illustrate a binomial distribution.
+
+```{python}
+# Simulate 10 coin flips  
+flips = binom.rvs(n=10, p=0.5, size=10000)  
+
+# Plot binomial histogram
+plt.hist(flips, bins=11, density=True) 
+
+# Overlay theoretical distribution
+x = np.arange(11)
+plt.plot(x, stats.binom.pmf(x, 10, 0.5))
+
+plt.title("Binomial Distribution")
+```
+
+This code does 10 random coin flips and creates a chart to illustrate the binomial distribution over the theoretical distribution.
+
+<br>
+
+**Step 3:**
+
+Illustrate a normal distribution.
+
+```{python}
+# Generate normal data
+data = norm.rvs(size=1000) 
+
+# Plot histogram
+plt.hist(data, bins=100, density=True)
+plt.title("Normal Distribution")
+plt.show()
+
+```
+
+By executing the commands above, we are shown an example of a normal distribution. As well can see in the graph, there is a bell-curve like structure, with the middle of the graph being the highest and the sides of the curve being the lowest, meaning the middle values occurred the most and dropped off towards the sides.
+
+<br>
+
+**Step 4:**
+
+Illustrate a Poisson distribution.
+
+```{python}
+# Generate Poisson-distributed data with mean of 5
+data = poisson.rvs(mu=5, size=10000)
+
+# Plot the histogram
+plt.hist(data, bins=20, density=True)
+plt.title("Poisson Distribution (mean=5)")
+plt.xlabel("Value") 
+plt.ylabel("Probability")
+
+# Add vertical line at mean
+plt.axvline(poisson.mean(5), color='red') 
+
+# Show plot
+plt.show()
+```
+
+By running this code, we can see an example of a poisson distribution. The histogram shows that around the values of 4-8 we see the highest probability, and after that, there is a consistent decrease.
+
+<br>
+
+**Step 5:**
+
+Illustrate the Law of Large Numbers.
+
+```{python}
+# Simulate 10 coin flips
+flips1 = np.random.binomial(1, 0.5, 10)
+mean1 = flips1.mean()
+
+# Simulate 1000 coin flips
+flips2 = np.random.binomial(1, 0.5, 1000) 
+mean2 = flips2.mean()
+
+# Plot histograms
+plt.subplot(1,2,1)
+plt.title("10 Flips")
+plt.hist(flips1)
+plt.axvline(mean1, color='r')
+
+plt.subplot(1,2,2)
+plt.title("1000 Flips")
+plt.hist(flips2)
+plt.axvline(mean2, color='r')
+
+plt.tight_layout()
+plt.show()
+```
+
+When examining the first graph, with 10 coin flips, we notice the lopsidedness between the outcomes, favoring one side over the other heavily. However, in the second graph, with a 1000 flips, we notice that the bars are about even. Additionally, in the first graph, the mean line is at 0.6, showing it favoring one side over another, but in the second graph, the mean line is at 0.5, showing that it is just about even. This illustrates the Law of Large Numbers, showing that the more data there is, the closer to the assumed mean the data will be.
+
+<br>
+
+**Step 6:**
+
+Illustrate the Central Limit Theorem.
+
+```{python}
+data = np.random.exponential(scale=2, size=10000)
+
+means = []
+for i in range(10, len(data), 30):
+    sample = data[:i]
+    means.append(sample.mean())
+
+plt.plot(means)
+plt.xlabel("Sample Size") 
+plt.ylabel("Sample Mean")
+plt.title("Convergence of Sample Mean")
+```
+
+As we see in the graph, as the data points are slowly being summed together over time, we get closer to a normal distribution. There is a very erratic start and it slowly changes to a straighter data set.
+
+<br>
+
+**Step 7:**
+
+The following code is to visualize the confusion matrix of the data.
+
+```{python}
+# Prior belief - 90% chance of rain
+p_rain = 0.9  
+
+# Likelihood - test is 90% accurate
+p_correct = 0.9
+
+# Observation - positive test
+p_pos_given_rain = 0.9 
+p_pos_given_norain = 0.1
+
+# Posterior - chance of rain given + test   
+p_rain_given_pos = (p_pos_given_rain * p_rain) / ((p_pos_given_rain * p_rain) + p_pos_given_norain * (1 - p_rain))
+
+print(p_rain_given_pos)
+```
+
+After analyzing this code, we can see the formula, and data points inserted. According to Bayes' Theorem, if there is 90% chance of rain and the test is 90% accurate, there is a 98.7% chance of rain.
+
+<br>
+
+**Conclusion:**
+
+As shown throughout this post, the use of Probability Theorems and Random Variables is important in creating predictions and analyzing current data. Through different formulas, graphs, and illustrations, we are able to visualize the different data sets and make educated predictions and assumptions about the data. By using these concepts in Machine Learning, the machine has the ability to implement these formulas and make accurate guesses too. Throughout this blog post, only a few topics were explored, however, there are dozens more out there that all serve their own individual purpose.

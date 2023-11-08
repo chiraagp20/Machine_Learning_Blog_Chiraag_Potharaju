@@ -1,13 +1,219 @@
 ---
-title: "Topic 1: Classification"
+title: "Topic 4: Classification"
 author: "Chiraag Potharaju"
-date: "2023-09-25"
+date: "2023-09-28"
 categories: [news, code, analysis]
 image: "Classification_pic1.png"
 ---
 
 This post gives detailed descriptions and analysis about Classification.
 
-```{r}
-1 + 1
+<br>
+
+**Introduction to Classification**
+
+Classification is a machine learning task that is primarily used in predicting categorical labels or classes. Throughout this post, we will dive deeper into classification in machine learning using Python, Scikit-learn, and Tensorflow highlighting the importance of this concept. There will also be several data visualizations and executable code chunks to emphasize these points.
+
+<br>
+
+**Importance of Classification**
+
+There are numerous applications for classification, some of which include:
+
+-   Emails- Classifying emails as spam or not
+
+-   Fraud- Classifying monetary transactions as fraud or not
+
+-   Medical- Classifying symptoms/images into categories to make accurate predictions on disease/issue
+
+-   Speech Recognition- Virtual assistants classify spoken words to respond accordingly
+
+These are just a few of the many application of classification used throughout daily life.
+
+<br>
+
+**Step 0:**
+
+This step is to ensure that required libraries are installed on the machine before proceeding.
+
+```         
+---
+  pip install numpy pandas matplotlib scikit-learn
+---
 ```
+
+This step installs the required libraries to run the code below. Ensure python is installed on the machine already and the terminal has admin access when running this command.
+
+<br>
+
+**Step 1:**
+
+When using Python, we have to import some libraries that will be utilized throughout the blog.
+
+```{python}
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import confusion_matrix
+```
+
+Some of the imports include numpy and pandas for data manipulation, sklearn modules from training and evaluation, and LogisticRegression for building the model.
+
+<br>
+
+**Step 2:**
+
+Import the data set
+
+```{python}
+from sklearn.datasets import load_iris
+
+iris_data = load_iris()
+X = iris_data.data
+y = iris_data.target
+```
+
+This code imports the iris data set and loads the data and target values into variables.
+
+<br>
+
+**Step 3:**
+
+We can peek the data by plotting a scatter-plot matrix.
+
+```{python}
+iris_df = pd.DataFrame(iris_data.data, columns=iris_data.feature_names)
+iris_df['target'] = iris_data.target
+
+pd.plotting.scatter_matrix(iris_df.drop('target', axis=1), c=iris_df['target'], figsize=(10,8))
+plt.show()
+```
+
+By executing the commands above, we are given a scatter-plot matrix that gives a visualization of the relationships in the data.
+
+<br>
+
+**Step 4:**
+
+Next, we will split the data into training and testing sets
+
+```{python}
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+```
+
+We used a test_size of 0.2 meaning that 20% of the data will be allocated for testing and 80% will be used for training. The rest of the variables are different data and target points being inserted.
+
+<br>
+
+**Step 5:**
+
+After dividing the data, we will train a Logistic Regression classifier.
+
+```{python}
+model = LogisticRegression(max_iter = 1000)
+model.fit(X_train, y_train)
+```
+
+This code fits the model on the training data.
+
+<br>
+
+**Step 6:**
+
+Evaluate the test set
+
+```{python}
+predictions = model.predict(X_test)
+accuracy = accuracy_score(y_test, predictions)
+
+print("Accuracy:", accuracy)
+```
+
+This code helps to evaluate the data and print out the accuracy values.
+
+<br>
+
+**Step 7:**
+
+The following code is to visualize the confusion matrix of the data.
+
+```{python}
+# Compute confusion matrix
+conf_mat = confusion_matrix(y_test, predictions)
+
+# Plot confusion matrix
+plt.imshow(conf_mat, interpolation='nearest')
+plt.title("Confusion Matrix")
+plt.colorbar()
+plt.show()
+```
+
+This gives us more insight into the performance across classes.
+
+<br>
+
+**Step 8:**
+
+If we want to make predictions on new data, we need to simulate new points, add the data, and tell the scalar to make the appropriate predictions.
+
+This is example of a data set.
+
+```{python}
+# Standardize features
+scaler = StandardScaler()  
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+# Train model
+model = LogisticRegression(max_iter=1000, solver='lbfgs')
+model.fit(X_train, y_train)
+
+# New data point  
+new_x = [[5.1, 3.8, 1.5, 0.3]]
+new_x = scaler.transform(new_x)
+
+# Probabilistic predictions
+probs = model.predict_proba(new_x)
+
+# Print predictions
+print('Prediction Probabilities:', probs)
+```
+
+As the output shows, once the new data was added, there were predictions made, however, the new data wasn't great, therefore the prediction values were very low, almost 0, meaning this would not be good data to have.
+
+<br>
+
+However, with a different data set, we can see the prediction values are vastly different.
+
+```{python}
+# Standardize features
+scaler = StandardScaler()  
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+# Train model
+model = LogisticRegression(max_iter=1000, solver='lbfgs')
+model.fit(X_train, y_train)
+
+# New data point  
+new_x = [[0.1, 0.2, 0.5, 0.3]]
+new_x = scaler.transform(new_x)
+
+# Probabilistic predictions
+probs = model.predict_proba(new_x)
+
+# Print predictions
+print('Prediction Probabilities:', probs)
+```
+
+However, once this data was tested, the numeric values outputted are clearly higher, showing that this data set is much more accurate and more practical when comparing to the original data set.
+
+<br>
+
+**Conclusion:**
+
+As shown throughout this post, the use of classification is highly beneficial into grouping data into different categories and making predictions based on previous data inputted. Once the model is trained on prior data, the data can then make fairly accurate predictions on the data entered and the validity and accuracy in comparison to the original values. Classification is a highly beneficial topic for Machine Learning and it will continue to become more advanced and accurate in the future.

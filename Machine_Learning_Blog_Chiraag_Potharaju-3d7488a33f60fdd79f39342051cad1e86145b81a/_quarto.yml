@@ -1,0 +1,23 @@
+project:
+  type: website
+
+website:
+  title: "CS 5805: Intro to Machine Learning Blog"
+  navbar:
+    right:
+      - about.qmd
+      - icon: github
+        href: https://github.com/chiraagp20/Machine_Learning_Blog_Chiraag_Potharaju
+      - icon: twitter
+        href: https://twitter.com
+format:
+  html:
+    theme: vapor
+    css: styles.css
+
+editor: visual
+
+comments: false
+giscus:
+repo: chiraagp20/Machine-Learning-Blog-Chiraag-Potharaju
+
