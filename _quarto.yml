@@ -19,5 +19,9 @@ editor: visual
 
 comments: false
 giscus:
+website: 
+  repo-url: https://github.com/chiraagp20/Machine_Learning_Blog_Chiraag_Potharaju
+  repo-actions: [edit, issue]
+  
 repo: chiraagp20/Machine-Learning-Blog-Chiraag-Potharaju
 
